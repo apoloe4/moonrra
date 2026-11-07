@@ -19,7 +19,7 @@ moon run examples/sensor
 moon run examples/traffic
 ```
 
-发布到 Mooncakes 后可使用 `moon add apoloe4/moonrra`；当前发布状态以仓库 Release 和 Mooncakes 页面为准。当前可先克隆源码运行上述示例。
+已发布 [Mooncakes 0.1.0](https://mooncakes.io/docs/apoloe4/moonrra@0.1.0)，可运行 `moon add apoloe4/moonrra@0.1.0`。独立消费者验证：`node tools/verify-consumer.mjs <新的空目录路径>`。
 
 在调用方 `moon.pkg` 中添加：
 
@@ -88,3 +88,8 @@ GitHub Actions 在 wasm-gc、wasm、js、native 四个目标执行检查、构�
 Apache-2.0，详见 [LICENSE](LICENSE)。独立实现；参考 [RRDtool 文档](https://oss.oetiker.ch/rrdtool/doc/rrdcreate.en.html) 中的循环归档概念，未移植 RRDtool 源码。
 
 
+
+
+## 0.1.0 发布验证
+
+[完整验证记录](docs/VALIDATION.md)；[申报草稿](docs/PROPOSAL.md)（应由本人核对后另行提交）。
