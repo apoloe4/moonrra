@@ -92,4 +92,4 @@ Apache-2.0，详见 [LICENSE](LICENSE)。独立实现；参考 [RRDtool 文档](
 
 ## 0.1.0 发布验证
 
-[完整验证记录](docs/VALIDATION.md)；[申报草稿](docs/PROPOSAL.md)（应由本人核对后另行提交）。
+[完整验证记录](docs/VALIDATION.md)；[项目申报书](docs/PROPOSAL.md)。
