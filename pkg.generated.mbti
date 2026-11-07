@@ -1,0 +1,61 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "apoloe4/moonrra"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn counter32_rate(UInt32, UInt32, Int32, wrap? : Bool) -> Double? raise ArchiveError
+
+// Errors
+pub(all) suberror ArchiveError {
+  InvalidConfig(String)
+  InvalidSample(String)
+  InvalidSnapshot(String)
+} derive(Eq, @debug.Debug)
+
+// Types and methods
+type Archive
+
+pub struct ArchiveInfo {
+  resolution : Int64
+  capacity : Int32
+  retained : Int32
+  oldest : Int64?
+  newest : Int64?
+  pending_known : Int32
+} derive(Eq, @debug.Debug)
+
+pub(all) enum Consolidation {
+  Average
+  Minimum
+  Maximum
+  Last
+} derive(Eq, @debug.Debug)
+
+pub struct Point {
+  timestamp : Int64
+  value : Double?
+} derive(Eq, @debug.Debug)
+
+pub struct Spec {
+  // private fields
+} derive(Eq, @debug.Debug)
+pub fn Spec::new(Int32, Int32, Consolidation, min_known? : Int32) -> Self raise ArchiveError
+
+pub struct Store {
+  // private fields
+}
+pub fn Store::fetch(Self, Int32, Int64, Int64) -> Array[Point] raise ArchiveError
+pub fn Store::info(Self, Int32) -> ArchiveInfo raise ArchiveError
+pub fn Store::latest(Self) -> Int64
+pub fn Store::new(Int32, Array[Spec]) -> Self raise ArchiveError
+pub fn Store::restore(Bytes) -> Self raise ArchiveError
+pub fn Store::retained(Self) -> Int32
+pub fn Store::snapshot(Self) -> Bytes
+pub fn Store::update(Self, Int64, Double?) -> Unit raise ArchiveError
+
+// Type aliases
+
+// Traits
