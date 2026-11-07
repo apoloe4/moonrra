@@ -1,7 +1,7 @@
 // Project baseline is the compiler actually verified for this source format.
 // It also exceeds the contest's moonc >= 0.10.16 requirement.
 import { spawnSync } from 'node:child_process';
-const minimum = [0, 10, 17];
+const minimum = [0, 10, 20];
 const result = spawnSync('moonc', ['-v'], { encoding: 'utf8' });
 if (result.error || result.status !== 0) {
   console.error('Cannot run moonc. Install the official MoonBit toolchain and add it to PATH.');
@@ -20,3 +20,4 @@ if (firstDifference !== -1 && actual[firstDifference] < minimum[firstDifference]
   process.exit(1);
 }
 console.log(`moonc ${actual.join('.')} satisfies project >= ${minimum.join('.')} and contest >= 0.10.16.`);
+

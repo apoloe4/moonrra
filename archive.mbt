@@ -1,25 +1,28 @@
 ///|
+#derive(Debug, Eq)
 pub(all) suberror ArchiveError {
   InvalidConfig(String)
   InvalidSample(String)
   InvalidSnapshot(String)
-} derive(Debug, Eq)
+}
 
 ///|
+#derive(Debug, Eq)
 pub(all) enum Consolidation {
   Average
   Minimum
   Maximum
   Last
-} derive(Debug, Eq)
+}
 
 ///|
+#derive(Debug, Eq)
 pub struct Spec {
   priv factor : Int32
   priv rows : Int32
   priv aggregation : Consolidation
   priv min_known : Int32
-} derive(Debug, Eq)
+}
 
 ///|
 /// An archive accepts a bucket only when at least min_known samples are known.
@@ -43,10 +46,11 @@ pub fn Spec::new(
 }
 
 ///|
+#derive(Debug, Eq)
 pub struct Point {
   timestamp : Int64
   value : Double?
-} derive(Debug, Eq)
+}
 
 ///|
 struct Archive {

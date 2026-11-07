@@ -1,4 +1,5 @@
 ///|
+#derive(Debug, Eq)
 pub struct ArchiveInfo {
   resolution : Int64
   capacity : Int32
@@ -6,7 +7,7 @@ pub struct ArchiveInfo {
   oldest : Int64?
   newest : Int64?
   pending_known : Int32
-} derive(Debug, Eq)
+}
 
 ///|
 /// Coverage metadata distinguishes expired history from retained unknown values.

@@ -308,3 +308,18 @@ test "forged semantic fields fail even with recomputed checksum" {
     )
   }
 }
+
+///|
+test "long running retention reaches a stable snapshot bound" {
+  let db = Store::new(1, [Spec::new(1, 60, Last), Spec::new(60, 24, Average)])
+  let mut plateau = 0
+  for t = 1; t <= 100000; t = t + 1 {
+    db.update(t.to_int64(), Some((t % 100).to_double()))
+    if t == 2000 {
+      plateau = db.snapshot().length()
+    }
+  }
+  assert_eq(db.retained(), 84)
+  assert_eq(db.snapshot().length(), plateau)
+  assert_eq(Store::restore(db.snapshot()).snapshot(), db.snapshot())
+}

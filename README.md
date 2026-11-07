@@ -6,7 +6,7 @@
 
 ## 安装与运行
 
-需要 `moonc >= 0.10.17`（满足赛事要求的 0.10.16 下限）。Native 目标另外需要 C 编译器。
+需要 `moonc >= 0.10.20`（满足赛事要求的 0.10.16 下限）。Native 目标另外需要 C 编译器。
 
 ```sh
 git clone https://github.com/apoloe4/moonrra.git
@@ -86,4 +86,5 @@ GitHub Actions 在 wasm-gc、wasm、js、native 四个目标执行检查、构�
 - [快照格式](docs/FORMAT.md)
 
 Apache-2.0，详见 [LICENSE](LICENSE)。独立实现；参考 [RRDtool 文档](https://oss.oetiker.ch/rrdtool/doc/rrdcreate.en.html) 中的循环归档概念，未移植 RRDtool 源码。
+
 
