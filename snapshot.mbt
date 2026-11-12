@@ -155,6 +155,9 @@ pub fn Store::restore(bytes : Bytes) -> Store raise ArchiveError {
     } else if a.low > a.high || a.last < a.low || a.last > a.high {
       raise InvalidSnapshot("invalid accumulator bounds")
     }
+    if a.count == 1 && (a.mean != a.last || a.low != a.last || a.high != a.last) {
+      raise InvalidSnapshot("inconsistent single-sample accumulator")
+    }
     let n = r.bounded(0, rows)
     if n.to_int64() > a.bucket {
       raise InvalidSnapshot("too many historical buckets")

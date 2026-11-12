@@ -323,3 +323,32 @@ test "long running retention reaches a stable snapshot bound" {
   assert_eq(db.snapshot().length(), plateau)
   assert_eq(Store::restore(db.snapshot()).snapshot(), db.snapshot())
 }
+
+///|
+test "single sample accumulator cannot forge its mean" {
+  let db = Store::new(1, [Spec::new(2, 3, Average)])
+  db.update(1L, Some(5.0))
+  let original = db.snapshot()
+  let value = @buffer.Buffer()
+  value.write_double_le(6.0)
+  let replacement = value.to_bytes()
+  let body = Bytes::makei(original.length() - 8, i => {
+    if i >= 88 && i < 96 {
+      replacement[i - 88]
+    } else {
+      original[i]
+    }
+  })
+  let b = @buffer.Buffer()
+  b.write_bytes(body)
+  b.write_int64_le(checksum(body, body.length()).to_int64())
+  assert_true(
+    try {
+      ignore(Store::restore(b.to_bytes()))
+      false
+    } catch {
+      _ => true
+    },
+  )
+  assert_eq(Store::restore(original).snapshot(), original)
+}
