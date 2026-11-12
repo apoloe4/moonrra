@@ -28,6 +28,12 @@ jobs:
       - name: Native file workflow
         if: matrix.target == 'native'
         run: moon run examples/files --target native
+      - name: RRDtool differential check
+        if: matrix.target == 'native'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y rrdtool
+          python3 tools/compare-rrd.py
   style:
     runs-on: ubuntu-latest
     steps:
@@ -39,4 +45,5 @@ jobs:
       - run: moon fmt --check
       - run: moon info
       - run: git diff --exit-code
+
 
