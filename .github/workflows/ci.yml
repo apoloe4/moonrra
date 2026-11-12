@@ -25,6 +25,9 @@ jobs:
       - run: moon run examples/basic --target ${{ matrix.target }}
       - run: moon run examples/sensor --target ${{ matrix.target }}
       - run: moon run examples/traffic --target ${{ matrix.target }}
+      - name: Native file workflow
+        if: matrix.target == 'native'
+        run: moon run examples/files --target native
   style:
     runs-on: ubuntu-latest
     steps:
@@ -36,3 +39,4 @@ jobs:
       - run: moon fmt --check
       - run: moon info
       - run: git diff --exit-code
+

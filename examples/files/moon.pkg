@@ -1,0 +1,10 @@
+import {
+  "apoloe4/moonrra" @rra,
+  "apoloe4/moonrra/storage",
+  "moonbitlang/async",
+  "moonbitlang/async/fs",
+}
+
+supported_targets = "+native"
+
+pkgtype(kind: "executable")
