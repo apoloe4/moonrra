@@ -102,4 +102,4 @@ Apache-2.0，详见 [LICENSE](LICENSE)。独立实现；参考 [RRDtool 文档](
 - `python3 tools/compare-rrd.py`：调用真实 RRDtool，对照四种聚合与缺测的16个桶（需安装 rrdtool 与 Native 编译环境）。
 - `moon run examples/benchmark --target js --release`：预热后测量百万次更新，验证记录与快照大小稳定。
 
-[文件接口与并发边界](docs/STORAGE.md) · [对照范围](docs/RRDTOOL.md) · [基准方法](docs/BENCHMARK.md) · [初审补充说明](docs/REVIEW-RESPONSE.md)
+[文件接口与并发边界](docs/STORAGE.md) · [对照范围](docs/RRDTOOL.md) · [基准方法](docs/BENCHMARK.md)
