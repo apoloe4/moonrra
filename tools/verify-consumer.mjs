@@ -5,7 +5,7 @@ import { spawnSync } from 'node:child_process';
 const directory = process.argv[2];
 if (!directory || fs.existsSync(directory)) throw new Error('Pass a new, nonexistent directory');
 fs.mkdirSync(directory, {recursive: true});
-fs.writeFileSync(path.join(directory, 'moon.mod'), 'name = "apoloe4/moonrra-consumer-check"\nimport { "apoloe4/moonrra@0.1.0" }\n');
+fs.writeFileSync(path.join(directory, 'moon.mod'), 'name = "apoloe4/moonrra-consumer-check"\nimport { "apoloe4/moonrra@0.2.0" }\n');
 fs.writeFileSync(path.join(directory, 'moon.pkg'), 'pkgtype(kind: "executable")\nimport { "apoloe4/moonrra" @rra }\n');
 fs.writeFileSync(path.join(directory, 'main.mbt'), `fn main {
   try {

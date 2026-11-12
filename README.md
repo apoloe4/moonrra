@@ -2,7 +2,7 @@
 
 纯 MoonBit 固定容量、多分辨率时序归档库。适用于服务监控、设备采样与网络流量历史：近期保留细节，长期保留聚合值，以固定数量的记录限制空间占用。
 
-当前版本 **0.1.0**。核心、快照编解码和计数器转换全部使用 MoonBit，无 C/JS 库封装，无第三方运行时依赖。算法参考 RRD 思路，采用独立、明确的对齐采样语义。
+当前版本 **0.2.0**。核心、快照编解码和计数器转换全部使用 MoonBit，无 C/JS 库封装，归档核心无第三方运行时依赖；新增 Native 文件适配使用官方 MoonBit async 文件接口。算法参考 RRD 思路，采用独立、明确的对齐采样语义。
 
 ## 安装与运行
 
@@ -20,7 +20,7 @@ moon run examples/sensor
 moon run examples/traffic
 ```
 
-已发布 [Mooncakes 0.1.0](https://mooncakes.io/docs/apoloe4/moonrra@0.1.0)，可运行 `moon add apoloe4/moonrra@0.1.0`。独立消费者验证：`node tools/verify-consumer.mjs <新的空目录路径>`。
+已发布 [Mooncakes 0.2.0](https://mooncakes.io/docs/apoloe4/moonrra@0.2.0)，可运行 `moon add apoloe4/moonrra@0.2.0`。独立消费者验证：`node tools/verify-consumer.mjs <新的空目录路径>`。
 
 在调用方 `moon.pkg` 中添加：
 
@@ -66,7 +66,7 @@ let restored = @rra.Store::restore(bytes)
 
 所有归档最多 100 万记录、最多 32 个归档，每个倍数最多 100 万。固定配置下核心历史状态有界；快照/查询会额外分配输出内存，快照按已存在记录编码，因此大小可增长至上限后稳定。
 
-`snapshot` / `restore` 负责字节序列；文件、对象存储或浏览器存储由调用方接入。当前不提供原地文件写入、事务或断电恢复保证。FNV-1a 只检查意外损坏，不是密码学认证。
+`snapshot` / `restore` 负责字节序列；文件、对象存储或浏览器存储由调用方接入。Native 可通过 `storage.save/load` 保存文件并继续写入（见下方文档）；不提供事务或断电恢复保证。FNV-1a 只检查意外损坏，不是密码学认证。
 
 首版不兼容 `.rrd` 文件格式，不实现 RRDtool 不规则采样插值、heartbeat、完整 COUNTER/DERIVE 数据源，也不提供 PromQL、标签索引或网络服务。32 位计数器的重置与回绕无法自动可靠区分，须由调用方明确选择。浮点结果允许舍入误差。
 
@@ -95,3 +95,11 @@ Apache-2.0，详见 [LICENSE](LICENSE)。独立实现；参考 [RRDtool 文档](
 
 [完整验证记录](docs/VALIDATION.md)；[项目申报书](docs/PROPOSAL.md)。
 
+
+## MVP 文件闭环与对照验证
+
+- `moon run examples/files --target native`：保存、重新打开、继续聚合、替换保存并核验磁盘结果。
+- `python3 tools/compare-rrd.py`：调用真实 RRDtool，对照四种聚合与缺测的16个桶（需安装 rrdtool 与 Native 编译环境）。
+- `moon run examples/benchmark --target js --release`：预热后测量百万次更新，验证记录与快照大小稳定。
+
+[文件接口与并发边界](docs/STORAGE.md) · [对照范围](docs/RRDTOOL.md) · [基准方法](docs/BENCHMARK.md) · [初审补充说明](docs/REVIEW-RESPONSE.md)
