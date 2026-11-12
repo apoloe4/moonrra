@@ -11,6 +11,7 @@
 ```sh
 git clone https://github.com/apoloe4/moonrra.git
 cd moonrra
+moon update
 moon check --deny-warn
 moon build --deny-warn
 moon test --deny-warn
@@ -93,3 +94,4 @@ Apache-2.0，详见 [LICENSE](LICENSE)。独立实现；参考 [RRDtool 文档](
 ## 0.1.0 发布验证
 
 [完整验证记录](docs/VALIDATION.md)；[项目申报书](docs/PROPOSAL.md)。
+
