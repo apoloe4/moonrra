@@ -1,0 +1,10 @@
+import {
+  "apoloe4/moonrra" @rra,
+  "moonbitlang/async/fs",
+}
+
+supported_targets = "+native"
+
+import {
+  "moonbitlang/async",
+} for "wbtest"

@@ -15,3 +15,7 @@ description = "Bounded multi-resolution time-series archives in pure MoonBit"
 preferred_target = "wasm-gc"
 
 warnings = "-implicit_impl_as_method"
+
+import {
+  "moonbitlang/async@0.22.9",
+}
