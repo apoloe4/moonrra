@@ -1,0 +1,6 @@
+import {
+  "apoloe4/moonrra" @rra,
+  "moonbitlang/core/env",
+}
+
+pkgtype(kind: "executable")
