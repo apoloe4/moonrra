@@ -1,0 +1,6 @@
+{"name":"room","tags":{"host":"east"},"fields":{"temperature":18},"timestamp":17}
+{"name":"room","tags":{"host":"west"},"fields":{"temperature":0},"timestamp":9}
+{"name":"room","tags":{"host":"east"},"fields":{"temperature":14},"timestamp":8}
+{"name":"room","tags":{"host":"east"},"fields":{"temperature":19},"timestamp":19}
+{"name":"room","tags":{"host":"east"},"fields":{"temperature":23},"timestamp":41}
+{"name":"room","tags":{"host":"east"},"fields":{"temperature":99},"timestamp":9}

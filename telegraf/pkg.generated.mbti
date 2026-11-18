@@ -1,0 +1,20 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "apoloe4/moonrra/telegraf"
+
+// Values
+pub fn decode(StringView) -> Array[Sample] raise
+
+pub fn replay(String) -> Array[String] raise
+
+// Errors
+
+// Types and methods
+pub struct Sample {
+  key : String
+  time : Int64
+  value : Double
+}
+
+// Type aliases
+
+// Traits

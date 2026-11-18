@@ -26,6 +26,18 @@ jobs:
       - run: moon run examples/basic --target ${{ matrix.target }}
       - run: moon run examples/sensor --target ${{ matrix.target }}
       - run: moon run examples/traffic --target ${{ matrix.target }}
+      - run: moon run examples/fleet --target ${{ matrix.target }}
+      - name: Replay the out-of-order fixture (Node)
+        if: matrix.target == 'js'
+        run: |
+          moon run examples/collector_node --target js -- fixtures/telegraf.ndjson > /tmp/moonrra-rows
+          node tools/check-collector.mjs fixture /tmp/moonrra-rows
+      - name: Collect Linux memory with Telegraf and verify the native replay
+        if: matrix.target == 'native'
+        run: |
+          docker run --rm -v "$PWD/fixtures/telegraf.conf:/etc/telegraf/telegraf.conf:ro" telegraf:1.36.0 telegraf --once > /tmp/moonrra-mem.ndjson
+          moon run examples/collector --target native -- /tmp/moonrra-mem.ndjson > /tmp/moonrra-rows
+          node tools/check-collector.mjs live /tmp/moonrra-rows /tmp/moonrra-mem.ndjson
       - name: Native file workflow
         if: matrix.target == 'native'
         run: moon run examples/files --target native

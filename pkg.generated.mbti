@@ -17,6 +17,16 @@ pub(all) suberror ArchiveError {
 }
 
 // Types and methods
+#derive(Eq, @debug.Debug)
+pub(all) enum Admission {
+  Buffered
+  Replaced
+  Superseded
+  Duplicate
+  TooLate
+  SeriesLimit
+}
+
 type Archive
 
 #derive(Eq, @debug.Debug)
@@ -28,6 +38,26 @@ pub struct ArchiveInfo {
   newest : Int64?
   pending_known : Int32
 }
+
+#derive(Eq, @debug.Debug)
+pub struct CohortPoint {
+  end : Int64
+  reporting : Int32
+  missing : Int32
+  unavailable : Int32
+  mean : Double?
+}
+
+pub struct Collector {
+  // private fields
+}
+pub fn Collector::advance(Self, String, Int64) -> Unit raise ArchiveError
+pub fn Collector::cohort(Self, Array[String], Int32, Int64, Int64, min_reporting~ : Int32) -> Array[CohortPoint] raise ArchiveError
+pub fn Collector::fetch(Self, String, Int32, Int64, Int64) -> Array[Point] raise ArchiveError
+pub fn Collector::flush(Self) -> Unit raise ArchiveError
+pub fn Collector::new(Int32, Array[Spec], lateness~ : Int32, max_series~ : Int32) -> Self raise ArchiveError
+pub fn Collector::observe(Self, String, Int64, Double) -> Admission raise ArchiveError
+pub fn Collector::series(Self) -> Array[String]
 
 #derive(Eq, @debug.Debug)
 pub(all) enum Consolidation {
